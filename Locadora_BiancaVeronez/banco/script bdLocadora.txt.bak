@@ -1,0 +1,12 @@
+create database bd_locadora;
+
+use bd_locadora;
+
+create table tb_cliente(
+  id_cliente int not null auto_increment primary key,
+  nome_cliente varchar(45) not null,
+  rg_cliente varchar(13) not null,
+  cpf_cliente varchar(15) unique not null,
+  email_cliente varchar(60)not null
+);
+

@@ -1,0 +1,33 @@
+create database bd_locadora;
+
+use bd_locadora;
+
+create table tb_cliente(
+  id_cliente int not null auto_increment primary key,
+  nome_cliente varchar(45) not null,
+  rg_cliente varchar(13) not null,
+  cpf_cliente varchar(15) unique not null,
+  email_cliente varchar(60)not null
+);
+
+create table tb_veiculo(
+  id_veiculo int not null auto_increment primary key,
+  nome_veiculo varchar(45) not null,
+  placa_veiculo varchar(7) not null,
+  ano_veiculo varchar(4) not null
+);
+
+create table tb_locacao(
+ cod_cliente int not null,
+ cod_veiculo int not null,
+ saida_veiculo date not null,
+ retorno_veiculo date not null,
+ primary key(cod_cliente,cod_veiculo,saida_veiculo,retorno_veiculo),
+
+ constraint fk_cod_cliente foreign key (cod_cliente)
+ references tb_cliente (id_cliente),
+ 
+ constraint fk_cod_veiculo foreign key (cod_veiculo)
+ references tb_veiculo (id_veiculo)
+);
+

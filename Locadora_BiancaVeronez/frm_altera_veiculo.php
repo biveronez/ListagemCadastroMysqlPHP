@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Alteração de Veículo</title>
+	
+</head>
+<body>
+ 
+   <?php
+    /*1- realizando a conexao com o banco de dados(local,usuario,
+     senha,nomeBanco)*/
+     //$con=mysqli_connect("localhost","root","","bd_projeto");
+	 include "conexao.php";
+    
+    
+   /*2- pegando o valor vindo da url */
+    $id_veiculo=$_GET["id"];
+  
+
+   /*3- criando o comando sql para selecionar o registro a ser alterado*/
+   $comandoSql="select * from tb_veiculo where id_veiculo='$id_veiculo'";
+
+
+    /*4- executando o comando sql */
+    $resultado=mysqli_query($con,$comandoSql);
+   
+   /*5- pegando os dados da consulta criada e armazenando em variaveis */   
+   $dados=mysqli_fetch_assoc($resultado);
+
+    $nome=$dados["nome_veiculo"];
+    $placa=$dados["placa_veiculo"];
+    $ano=$dados["ano_veiculo"];
+      
+   ?>
+   <!--preenchendo o formulario com dados da consulta -->
+
+   <h3> Alteração de Veículo </h3>
+	
+	<form action="altera_veiculo.php" method="POST">
+	
+      <label for="id"> Id: </label>
+      <input type="text" id="id" name="id" readonly value="<?php echo $id_veiculo ?>">
+     
+	  <label for="nome"> Nome: </label>
+      <input type="text" id="nome" name="nome" value="<?php echo $nome ?>" >
+   
+      <label for="placa"> Placa: </label>
+      <input type="text" id="placa" name="placa" value="<?php echo $placa ?>" >
+        
+	  <label for="ano"> Ano: </label>
+      <input type="text" id="ano" name="ano" value="<?php echo $ano ?>">
+	  	 
+    
+      <input type="submit" value="Alterar">
+
+   </form>
+
+  
+  </div>
+</body>
+</html>
